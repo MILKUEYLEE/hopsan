@@ -93,7 +93,7 @@ bool LoadExternal::load(const HString &rLibpath)
     }
 
     // Load library
-    lib_ptr = LoadLibrary(rLibpath.c_str()); //Load the dll
+    lib_ptr = LoadLibraryA(rLibpath.c_str()); //Load the dll (narrow path, also in UNICODE builds)
 
 //End of 32-bit
 

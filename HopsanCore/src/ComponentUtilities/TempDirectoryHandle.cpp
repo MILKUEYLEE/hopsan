@@ -93,7 +93,8 @@ bool TempDirectoryHandle::isValid() const
 
 const HString TempDirectoryHandle::getTempDirectory() const {
 #if __cplusplus >= 201703L
-    return std::filesystem::temp_directory_path().c_str();
+    // path::c_str() is wchar_t on Windows
+    return HString(std::filesystem::temp_directory_path().string().c_str());
 #else
 #ifdef _WIN32
     char tempdirbuff[MAX_PATH+1];

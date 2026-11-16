@@ -404,6 +404,22 @@ size_t HopsanEssentials::getNumDebugMessages() const
     return mpMessageHandler->getNumDebugMessages();
 }
 
+//! @brief Registers a component type whose code is compiled into the calling program
+//! @param [in] rTypeName The component type name
+//! @param [in] pCreator Function that creates an instance (Component::Creator)
+//! @returns True if registered, false if the type name was already taken
+bool HopsanEssentials::registerComponentCreator(const HString &rTypeName, ComponentFactory::CreatorFunctionT pCreator)
+{
+    if (mpComponentFactory->hasKey(rTypeName))
+    {
+        return false;
+    }
+    mpComponentFactory->registerCreatorFunction(rTypeName, pCreator);
+    checkClassFactoryStatus(mpComponentFactory, mpMessageHandler);
+    mpComponentFactory->clearRegisterStatus();
+    return true;
+}
+
 //! @brief Loads an external component library
 //! @param [in] path The path to the library DLL or SO file
 //! @returns True if loaded successfully, otherwise false

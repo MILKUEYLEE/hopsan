@@ -31,7 +31,18 @@
 #ifndef WIN32DLL_H_INCLUDED
 #define WIN32DLL_H_INCLUDED
 
+#if defined(HOPSANCORE_EXTERNAL_API)
+// The embedding build system decides the symbol export of HopsanCore, e.g. HopsanCore compiled as
+// an Unreal Engine module with HOPSANCORE_EXTERNAL_API=<MODULE>_API
+#define HOPSANCORE_DLLAPI HOPSANCORE_EXTERNAL_API
 #ifdef _WIN32
+#define DLLEXPORT __declspec(dllexport)
+#define DLLIMPORT __declspec(dllimport)
+#else
+#define DLLEXPORT __attribute__((visibility("default")))
+#define DLLIMPORT
+#endif
+#elif defined(_WIN32)
 
 //! Specifies that a function or class will be exported from a DLL  on Windows platforms
 #define DLLEXPORT __declspec(dllexport)

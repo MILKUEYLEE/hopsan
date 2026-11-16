@@ -408,7 +408,7 @@ size_t HopsanEssentials::getNumDebugMessages() const
 //! @param [in] rTypeName The component type name
 //! @param [in] pCreator Function that creates an instance (Component::Creator)
 //! @returns True if registered, false if the type name was already taken
-bool HopsanEssentials::registerComponentCreator(const HString &rTypeName, ComponentFactory::CreatorFunctionT pCreator)
+bool HopsanEssentials::registerComponentCreator(const HString &rTypeName, Component* (*pCreator)())
 {
     if (mpComponentFactory->hasKey(rTypeName))
     {

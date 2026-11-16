@@ -103,7 +103,7 @@ public:
     bool openCoreLogFile(const char* absoluteFilePath);
 
     // Components compiled into the calling program (no external library needed)
-    bool registerComponentCreator(const HString &rTypeName, ComponentFactory::CreatorFunctionT pCreator);
+    bool registerComponentCreator(const HString &rTypeName, Component* (*pCreator)());
 
     // External libraries
     bool loadExternalComponentLib(const char* path);
